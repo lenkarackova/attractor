@@ -1,5 +1,4 @@
-#ifndef PARAMETERMODEL_H
-#define PARAMETERMODEL_H
+#pragma once
 
 #include <QAbstractListModel>
 
@@ -21,7 +20,7 @@ struct Parameter
     }
 };
 
-class ParameterModel : public QAbstractListModel
+class ParameterListModel : public QAbstractListModel
 {
     Q_OBJECT
 
@@ -35,7 +34,7 @@ public:
     };
     Q_ENUM(ParameterModelRoles)
 
-    ParameterModel(QObject* parent = nullptr);
+    ParameterListModel(QObject* parent = nullptr);
 
     void setParameters(const std::vector<Parameter>& parameters);
     bool setParameterValues(std::vector<float> values, bool notify = true);
@@ -54,4 +53,3 @@ private:
     std::vector<Parameter> m_parameters;
 };
 
-#endif // PARAMETERMODEL_H

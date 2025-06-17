@@ -1,5 +1,4 @@
-#ifndef VERTEX_H_
-#define VERTEX_H_
+#pragma once
 
 #include <QVector3D>
 
@@ -19,4 +18,3 @@ public:
     QVector3D toVector3D() const;
 };
 
-#endif		//VERTEX_H_

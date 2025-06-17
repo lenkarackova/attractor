@@ -1,9 +1,8 @@
-#ifndef ATTRACTOR_H
-#define ATTRACTOR_H
+#pragma once
 
 #include "AttractorSystems.h"
-#include "ColorModel.h"
-#include "ParameterModel.h"
+#include "ColorViewModel.h"
+#include "ParameterListModel.h"
 #include "AttractorData.h"
 
 #include <QObject>
@@ -11,6 +10,7 @@
 class Attractor : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
 
     Q_PROPERTY(QStringList attractorTypes READ attractorTypes CONSTANT)
     Q_PROPERTY(QAbstractListModel* parameterModel READ parameterModel NOTIFY attractorChanged)
@@ -19,7 +19,7 @@ class Attractor : public QObject
     Q_PROPERTY(QVector3D scale READ scale NOTIFY attractorChanged)
 
 public:
-    enum AttractorType
+    enum class AttractorType
     {
         Lorenz,
         Lorenz84,
@@ -38,8 +38,8 @@ public:
     };
     Q_ENUM(AttractorType)
 
-    Attractor(AttractorType type = AttractorType::Lorenz, ColorModel* colorModel = nullptr);
-    Attractor(AttractorType type, std::vector<float> parameters, ColorModel* colorModel = nullptr);
+    Attractor(AttractorType type = AttractorType::Lorenz, ColorViewModel* colorModel = nullptr);
+    Attractor(AttractorType type, std::vector<float> parameters, ColorViewModel* colorModel = nullptr);
 
     Q_INVOKABLE void exportOBJ(QString filename, int count);
 
@@ -59,7 +59,7 @@ public slots:
     bool random();    
     void setType(AttractorType type);
     void setParameters(std::vector<float> parameters);
-    void setColorModel(ColorModel* colorModel);
+    void setColorModel(ColorViewModel* colorModel);
 
 signals:
     void typeChanged(AttractorType type);
@@ -74,12 +74,11 @@ private slots:
 private:
     void initialize(bool tests = true);
 
-    AttractorType m_type;
+    AttractorType m_type = AttractorType::Clifford;
     AttractorData m_data;
-    AttractorSystem* m_system;
-    ColorModel* m_colorModel = nullptr;
-    ParameterModel* m_parameterModel;
+    std::unique_ptr<AttractorSystem> m_system;
+    ColorViewModel* m_colorModel = nullptr;
+    ParameterListModel* m_parameterModel = nullptr;
 };
 
 #include "Attractor.inl"
-#endif // ATTRACTOR_H

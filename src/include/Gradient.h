@@ -1,5 +1,4 @@
-#ifndef GRADIENT_H
-#define GRADIENT_H
+#pragma once
 
 #include <QColor>
 #include <QStringList>
@@ -16,7 +15,6 @@ public:
     void setMax(double max);
     void setColorStops(QVector<QColor> const & colorStops);
 
-    //QList<QColor> stops() const;
     QStringList stopsList() const;
     QVector<QColor> stops() const;
 
@@ -27,4 +25,3 @@ private:
     QColor interpolate(const QColor & c1, const QColor & c2, double v) const;
 };
 
-#endif // GRADIENT_H

@@ -42,7 +42,7 @@ Column {
             anchors.verticalCenter: titleRect.verticalCenter
             anchors.right: titleRect.right
             hoverEnabled: false
-            font.pointSize: 10
+            font.pointSize: 9
             rotation: 90
 
             Behavior on rotation {

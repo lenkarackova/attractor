@@ -1,9 +1,9 @@
-import QtQuick
-import QtQuick3D
-import QtQuick3D.Helpers
-import QtQuick.Controls
-import QtQuick.Layouts
-import QtQuick.Dialogs
+import QtQuick 6.8
+import QtQuick3D 6.8
+import QtQuick3D.Helpers 6.8
+import QtQuick.Controls 6.8
+import QtQuick.Layouts 6.8
+import QtQuick.Dialogs 6.8
 
 import AttractorExplorer 1.0
 
@@ -32,7 +32,7 @@ ApplicationWindow {
 
         OrthographicCamera {
             id: camera
-            property real zoom: 5.0
+            property real zoom: 7.0
             position: Qt.vector3d(0, 0, 100)
             clipNear: 0
             verticalMagnification: zoom
@@ -222,7 +222,7 @@ ApplicationWindow {
                         Slider {
                             id: pointCount
                             from: 0
-                            to: 1000000
+                            to: 1500000
                             height: 15
                             value: viewModel.pointCloud.count
                             onMoved: viewModel.pointCloud.count = pointCount.value
@@ -276,7 +276,7 @@ ApplicationWindow {
                         Rectangle {
                             id: solidColor
                             color: viewModel.colorModel.attractorColor
-                            visible: colorMode.currentIndex === ColorModel.Single
+                            visible: colorMode.currentIndex === ColorViewModel.Single
                             width: colorMode.width
                             height: colorMode.height
                             border.color: 'gray'
@@ -296,7 +296,7 @@ ApplicationWindow {
                             width: colorMode.width
                             height: colorMode.height
                             model: viewModel.colorModel.colorGradients
-                            visible: colorMode.currentIndex !== ColorModel.Single
+                            visible: colorMode.currentIndex !== ColorViewModel.Single
 
                             currentIndex: viewModel.colorModel.gradientIndex
                             onActivated: viewModel.colorModel.gradientIndex = currentIndex
@@ -314,7 +314,6 @@ ApplicationWindow {
                                     border.color: highlighted ? 'white' : 'gray'
                                     border.width: highlighted ? 2 : 1
                                     width: gradientSwitch.width
-                                    //color: highlighted ? 'white' : "transparent"
                                 }
 
                                 highlighted: gradientSwitch.highlightedIndex === index
@@ -323,7 +322,6 @@ ApplicationWindow {
                             background: GradientRectangle {
                                 id: gradientBg
                                 model: viewModel.colorModel.gradientStops
-                                //border.color: 'gray'
                                 border.width: 1
                                 radius: 5
                             }
@@ -400,7 +398,7 @@ ApplicationWindow {
                             height: 30
                             from: 1000
                             to: 1000000
-                            value: 50000
+                            value: 10000
                             stepSize: 1000
                         }
 
@@ -417,55 +415,6 @@ ApplicationWindow {
                             nameFilters: ["OBJ files (*.obj)"]
                             onAccepted: viewModel.attractor.exportOBJ(selectedFile, exportPointCount.value)
                         }
-                    }
-                }
-
-
-                AccordionItem {
-                    title: "Render"
-                    itemIcon: "❃"
-
-                    Column {
-                        padding: 6
-                        spacing: 6
-
-                        /*Row {
-                            Button {
-                                text: "Viewport render"
-                            }
-
-                            Button {
-                                text: "Render image"
-                            }
-                        }
-
-                        Label {
-                            text: "Quality:"
-                        }
-
-                        ComboBox {
-                            model: [ "Medium", "High", "Very High", "Custom" ]
-                        }
-
-                        Label {
-                            text: "Background:"
-                        }
-
-                        ComboBox {
-                            model: [ "Solid", "Transparent" ]
-                        }
-
-                        Label {
-                            text: "Dimensions:"
-                        }
-
-                        ComboBox {
-                            model: [ "Viewport", "800 x 600", "1024 x 768", "1920 x 1080" ]
-                        }
-
-                        Button {
-                            text: "Render"
-                        }*/
                     }
                 }
             }

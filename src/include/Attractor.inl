@@ -9,7 +9,7 @@ void Attractor::getPoints(unsigned long int iterations,
     double minColor, maxColor;
     double value;
 
-    ColorModel::ColoringMode mode = ColorModel::ColoringMode::Single;
+    ColorViewModel::ColoringMode mode = ColorViewModel::ColoringMode::Single;
     QColor color = Qt::white;
     Gradient gradient = Gradient({ Qt::red, Qt::yellow, Qt::green, Qt::blue });
 
@@ -22,19 +22,19 @@ void Attractor::getPoints(unsigned long int iterations,
 
     switch (mode)
     {
-    case ColorModel::ColoringMode::Single:
+    case ColorViewModel::ColoringMode::Single:
         minColor = 0.0;
         maxColor = 0.0;
         break;
-    case ColorModel::ColoringMode::Depth:
+    case ColorViewModel::ColoringMode::Depth:
         minColor = m_data.min.z();
         maxColor = m_data.max.z();
         break;
-    case ColorModel::ColoringMode::Velocity:
+    case ColorViewModel::ColoringMode::Velocity:
         minColor = 0.1;
         maxColor = m_data.maxSpeed;
         break;
-    case ColorModel::ColoringMode::Angle:
+    case ColorViewModel::ColoringMode::Angle:
         minColor = m_data.minAngle;
         maxColor = m_data.maxAngle;
         break;
@@ -58,17 +58,17 @@ void Attractor::getPoints(unsigned long int iterations,
         if (i >= SETTLE_ITERATIONS)
         {
             // get color from gradient
-            if (mode != ColorModel::ColoringMode::Single)
+            if (mode != ColorViewModel::ColoringMode::Single)
             {
                 switch (mode)
                 {
-                case ColorModel::ColoringMode::Depth:
+                case ColorViewModel::ColoringMode::Depth:
                     value = v0.z();
                     break;
-                case ColorModel::ColoringMode::Velocity:
+                case ColorViewModel::ColoringMode::Velocity:
                     value = v1.distanceToPoint(v0);
                     break;
-                case ColorModel::ColoringMode::Angle:
+                case ColorViewModel::ColoringMode::Angle:
                     value = v1.angle(v2, v0);
                     break;
                 default:

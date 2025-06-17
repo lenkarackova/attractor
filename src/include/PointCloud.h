@@ -1,5 +1,4 @@
-#ifndef POINTCLOUD_H
-#define POINTCLOUD_H
+#pragma once
 
 #include "Attractor.h"
 
@@ -28,8 +27,7 @@ signals:
 private:
     void updateGeometry();
 
-    int m_pointCount = 500000;
+    int m_pointCount = 800000;
     Attractor* m_attractor;
 };
 
-#endif // POINTCLOUD_H

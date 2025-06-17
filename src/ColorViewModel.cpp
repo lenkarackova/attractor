@@ -1,18 +1,18 @@
-#include "include/ColorModel.h"
+#include "include/ColorViewModel.h"
 
 #include <QMetaEnum>
 
 
-ColorModel::ColorModel(QObject *parent) : QObject { parent } { }
+ColorViewModel::ColorViewModel(QObject *parent) : QObject { parent } { }
 
 
-ColorModel::ColoringMode ColorModel::coloringMode() const
+ColorViewModel::ColoringMode ColorViewModel::coloringMode() const
 {
     return m_coloringMode;
 }
 
 
-QStringList ColorModel::coloringModes() const
+QStringList ColorViewModel::coloringModes() const
 {
     QMetaEnum metaEnum = QMetaEnum::fromType<ColoringMode>();
     QStringList enumStrings;
@@ -26,19 +26,19 @@ QStringList ColorModel::coloringModes() const
 }
 
 
-QVector<QColor> ColorModel::gradientStops() const
+QVector<QColor> ColorViewModel::gradientStops() const
 {
     return m_colorGradients[m_gradientIndex];
 }
 
 
-int ColorModel::gradientIndex() const
+int ColorViewModel::gradientIndex() const
 {
     return m_gradientIndex;
 }
 
 
-void ColorModel::setColoringMode(ColoringMode mode)
+void ColorViewModel::setColoringMode(ColoringMode mode)
 {
     if (m_coloringMode != mode)
     {
@@ -48,7 +48,7 @@ void ColorModel::setColoringMode(ColoringMode mode)
 }
 
 
-void ColorModel::setGradientIndex(int index)
+void ColorViewModel::setGradientIndex(int index)
 {
     if (m_gradientIndex != index && index < m_colorGradients.size())
     {
@@ -58,13 +58,13 @@ void ColorModel::setGradientIndex(int index)
 }
 
 
-QColor ColorModel::attractorColor() const
+QColor ColorViewModel::attractorColor() const
 {
     return m_attractorColor;
 }
 
 
-Gradient ColorModel::gradient() const
+Gradient ColorViewModel::gradient() const
 {
     return Gradient(m_colorGradients[m_gradientIndex]);
 }

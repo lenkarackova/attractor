@@ -3,7 +3,7 @@
 #include <QRandomGenerator>
 
 
-AttractorSystem::AttractorSystem(QString name, const std::vector<Parameter>& parameters, ParameterModel* model)
+AttractorSystem::AttractorSystem(QString name, const std::vector<Parameter>& parameters, ParameterListModel* model)
     : m_name(name)
     , m_p(model)
 {
@@ -16,7 +16,7 @@ AttractorSystem::AttractorSystem(QString name, const std::vector<Parameter>& par
 };
 
 
-AttractorSystem::AttractorSystem(int count, float min, float max, ParameterModel* model)
+AttractorSystem::AttractorSystem(int count, float min, float max, ParameterListModel* model)
     : m_p(model)
 {
     std::vector<Parameter> p;
@@ -49,7 +49,7 @@ void AttractorSystem::reset()
 }
 
 
-LorenzAttractor::LorenzAttractor(ParameterModel* model)
+LorenzAttractor::LorenzAttractor(ParameterListModel* model)
     : AttractorSystem
     (
         "Lorenz",
@@ -76,7 +76,7 @@ void LorenzAttractor::next(Vertex & v)
 }
 
 
-Lorenz84Attractor::Lorenz84Attractor(ParameterModel* model)
+Lorenz84Attractor::Lorenz84Attractor(ParameterListModel* model)
     : AttractorSystem
     (
         "Lorenz84",
@@ -103,7 +103,7 @@ void Lorenz84Attractor::next(Vertex & v)
 }
 
 
-RosslerAttractor::RosslerAttractor(ParameterModel* model)
+RosslerAttractor::RosslerAttractor(ParameterListModel* model)
     : AttractorSystem
     (
         "Rossler",
@@ -128,7 +128,7 @@ void RosslerAttractor::next(Vertex & v)
 }
 
 
-PickoverAttractor::PickoverAttractor(ParameterModel* model)
+PickoverAttractor::PickoverAttractor(ParameterListModel* model)
     : AttractorSystem
     (
         "Clifford Pickover",
@@ -154,7 +154,7 @@ void PickoverAttractor::next(Vertex & v)
 }
 
 
-CliffordAttractor::CliffordAttractor(ParameterModel* model)
+CliffordAttractor::CliffordAttractor(ParameterListModel* model)
     : AttractorSystem
     (
         "Clifford Pickover 2",
@@ -181,7 +181,7 @@ void CliffordAttractor::next(Vertex & v)
 }
 
 
-CliffordRectangleAttractor::CliffordRectangleAttractor(ParameterModel* model)
+CliffordRectangleAttractor::CliffordRectangleAttractor(ParameterListModel* model)
     : AttractorSystem
     (
         "Clifford Pickover Rectangle",
@@ -208,7 +208,7 @@ void CliffordRectangleAttractor::next(Vertex & v)
 }
 
 
-DeJongAttractor::DeJongAttractor(ParameterModel* model)
+DeJongAttractor::DeJongAttractor(ParameterListModel* model)
     : AttractorSystem
     (
         "Peter de Jong",
@@ -235,7 +235,7 @@ void DeJongAttractor::next(Vertex & v)
 }
 
 
-DeJong2Attractor::DeJong2Attractor(ParameterModel* model)
+DeJong2Attractor::DeJong2Attractor(ParameterListModel* model)
     : AttractorSystem
     (
         "Svensson",
@@ -262,7 +262,7 @@ void DeJong2Attractor::next(Vertex & v)
 }
 
 
-PolynomialAAttractor::PolynomialAAttractor(ParameterModel* model)
+PolynomialAAttractor::PolynomialAAttractor(ParameterListModel* model)
     : AttractorSystem
     (
         "Polynomial A",
@@ -288,7 +288,7 @@ void PolynomialAAttractor::next(Vertex & v)
 }
 
 
-PolynomialBAttractor::PolynomialBAttractor(ParameterModel* model)
+PolynomialBAttractor::PolynomialBAttractor(ParameterListModel* model)
     : AttractorSystem
     (
         "Polynomial B",
@@ -317,7 +317,7 @@ void PolynomialBAttractor::next(Vertex & v)
 }
 
 
-PolynomialCAttractor::PolynomialCAttractor(ParameterModel* model)
+PolynomialCAttractor::PolynomialCAttractor(ParameterListModel* model)
     : AttractorSystem(18, -1.5f, 1.5f, model)
 {
     m_name = "Polynomial C";
@@ -336,7 +336,7 @@ void PolynomialCAttractor::next(Vertex & v)
 }
 
 
-TinkerbellAttractor::TinkerbellAttractor(ParameterModel* model)
+TinkerbellAttractor::TinkerbellAttractor(ParameterListModel* model)
     : AttractorSystem
     (
         "Tinkerbell",
@@ -363,7 +363,7 @@ void TinkerbellAttractor::next(Vertex & v)
 }
 
 
-PolynomialAbsAttractor::PolynomialAbsAttractor(ParameterModel* model)
+PolynomialAbsAttractor::PolynomialAbsAttractor(ParameterListModel* model)
     : AttractorSystem(21, -1.5f, 1.5f, model)
 {
     m_name = "Polynomial Function: Abs";
@@ -382,7 +382,7 @@ void PolynomialAbsAttractor::next(Vertex & v)
 }
 
 
-PolynomialPowerAttractor::PolynomialPowerAttractor(ParameterModel* model)
+PolynomialPowerAttractor::PolynomialPowerAttractor(ParameterListModel* model)
     : AttractorSystem(24, -1.5f, 1.5f, model)
 {
     m_name = "Polynomial Function: Power";
@@ -401,7 +401,7 @@ void PolynomialPowerAttractor::next(Vertex & v)
 }
 
 
-RabinovichFabrikantAttractor::RabinovichFabrikantAttractor(ParameterModel* model)
+RabinovichFabrikantAttractor::RabinovichFabrikantAttractor(ParameterListModel* model)
     : AttractorSystem
     (
         "Rabinovich-Fabrikant",

@@ -1,5 +1,4 @@
-#ifndef COLORMODEL_H
-#define COLORMODEL_H
+#pragma once
 
 #include "Gradient.h"
 
@@ -9,7 +8,7 @@
 #include <QVector>
 #include <QQmlEngine>
 
-class ColorModel : public QObject
+class ColorViewModel : public QObject
 {
     Q_OBJECT
     QML_ELEMENT
@@ -23,7 +22,7 @@ class ColorModel : public QObject
     Q_PROPERTY(int gradientIndex READ gradientIndex WRITE setGradientIndex NOTIFY gradientChanged)
 
 public:
-    enum ColoringMode
+    enum class ColoringMode
     {
         Single,
         Depth,
@@ -32,7 +31,7 @@ public:
     };
     Q_ENUM(ColoringMode)
 
-    ColorModel(QObject *parent = nullptr);
+    ColorViewModel(QObject *parent = nullptr);
 
     Gradient gradient() const;
     ColoringMode coloringMode() const;
@@ -52,7 +51,7 @@ signals:
     void gradientChanged(int index);
 
 private:
-    ColoringMode m_coloringMode = ColoringMode::Single;
+    ColoringMode m_coloringMode = ColoringMode::Velocity;
     QColor m_backgroundColor = Qt::black;
     QColor m_attractorColor = Qt::white;
     int m_gradientIndex = 0;
@@ -68,5 +67,3 @@ private:
         { {255,0,23}, {255,137,0}, {255,178,0}, {255,255,0}, {148,255,0} },
     };
 };
-
-#endif // COLORMODEL_H

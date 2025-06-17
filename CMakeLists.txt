@@ -32,10 +32,10 @@ qt_add_qml_module(appAttractorExplorer
         src/include/PointCloud.h src/PointCloud.cpp
         src/include/Vertex.h src/Vertex.cpp
         src/include/helpers.h
-        src/include/ColorModel.h src/ColorModel.cpp
+        src/include/ColorViewModel.h src/ColorViewModel.cpp
         src/include/ViewModel.h src/ViewModel.cpp
         src/include/Gradient.h src/Gradient.cpp
-        src/include/ParameterModel.h src/ParameterModel.cpp
+        src/include/ParameterListModel.h src/ParameterListModel.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

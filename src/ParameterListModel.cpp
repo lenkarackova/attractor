@@ -1,16 +1,16 @@
-#include "include/ParameterModel.h"
+#include "include/ParameterListModel.h"
 
 
-ParameterModel::ParameterModel(QObject *parent) {}
+ParameterListModel::ParameterListModel(QObject *parent) {}
 
 
-int ParameterModel::rowCount(const QModelIndex &parent) const
+int ParameterListModel::rowCount(const QModelIndex &parent) const
 {
     return m_parameters.size();
 }
 
 
-void ParameterModel::setParameters(const std::vector<Parameter>& parameters)
+void ParameterListModel::setParameters(const std::vector<Parameter>& parameters)
 {
     beginResetModel();
     m_parameters = parameters;
@@ -20,7 +20,7 @@ void ParameterModel::setParameters(const std::vector<Parameter>& parameters)
 }
 
 
-bool ParameterModel::setParameterValues(std::vector<float> values, bool notify)
+bool ParameterListModel::setParameterValues(std::vector<float> values, bool notify)
 {
     if (values.size() != rowCount())
         return false;
@@ -37,13 +37,13 @@ bool ParameterModel::setParameterValues(std::vector<float> values, bool notify)
 }
 
 
-int ParameterModel::parameterCount() const
+int ParameterListModel::parameterCount() const
 {
     return m_parameters.size();
 }
 
 
-float ParameterModel::value(int index) const
+float ParameterListModel::value(int index) const
 {
     if (index < m_parameters.size())
         return m_parameters[index].value;
@@ -52,7 +52,7 @@ float ParameterModel::value(int index) const
 }
 
 
-float ParameterModel::min(int index) const
+float ParameterListModel::min(int index) const
 {
     if (index < m_parameters.size())
         return m_parameters[index].min;
@@ -61,7 +61,7 @@ float ParameterModel::min(int index) const
 }
 
 
-float ParameterModel::max(int index) const
+float ParameterListModel::max(int index) const
 {
     if (index < m_parameters.size())
         return m_parameters[index].max;
@@ -70,7 +70,7 @@ float ParameterModel::max(int index) const
 }
 
 
-QVariant ParameterModel::data(const QModelIndex &index, int role) const
+QVariant ParameterListModel::data(const QModelIndex &index, int role) const
 {
     if (index.row() < m_parameters.size())
     {
@@ -88,7 +88,7 @@ QVariant ParameterModel::data(const QModelIndex &index, int role) const
 }
 
 
-bool ParameterModel::setData(const QModelIndex &index, const QVariant &value, int role)
+bool ParameterListModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if (!hasIndex(index.row(), index.column(), index.parent()) || !value.isValid())
         return false;
@@ -104,7 +104,7 @@ bool ParameterModel::setData(const QModelIndex &index, const QVariant &value, in
 }
 
 
-QHash<int, QByteArray> ParameterModel::roleNames() const
+QHash<int, QByteArray> ParameterListModel::roleNames() const
 {
     return
     {

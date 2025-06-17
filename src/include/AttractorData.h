@@ -1,5 +1,4 @@
-#ifndef ATTRACTORDATA_H
-#define ATTRACTORDATA_H
+#pragma once
 
 #include "Vertex.h"
 
@@ -31,4 +30,3 @@ struct AttractorData
     int	periodic;
 };
 
-#endif // ATTRACTORDATA_H

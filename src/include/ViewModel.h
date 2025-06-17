@@ -1,9 +1,8 @@
-#ifndef VIEWMODEL_H
-#define VIEWMODEL_H
+#pragma once
 
 #include "Attractor.h"
 #include "PointCloud.h"
-#include "ColorModel.h"
+#include "ColorViewModel.h"
 
 #include <QObject>
 #include <QQmlEngine>
@@ -13,9 +12,9 @@ class ViewModel : public QObject
     Q_OBJECT
     QML_ELEMENT
 
-    Q_PROPERTY(Attractor* attractor MEMBER m_attractor NOTIFY attractorChanged)
-    Q_PROPERTY(PointCloud* pointCloud MEMBER m_pointCloud NOTIFY pointCloudChanged)
-    Q_PROPERTY(ColorModel* colorModel MEMBER m_colorModel NOTIFY colorsChanged)
+    Q_PROPERTY(Attractor* attractor READ attractor CONSTANT)
+    Q_PROPERTY(PointCloud* pointCloud READ pointCloud CONSTANT)
+    Q_PROPERTY(ColorViewModel* colorModel READ colorModel CONSTANT)
 
     Q_PROPERTY(float opacity MEMBER m_opacity NOTIFY opacityChanged)
 
@@ -25,18 +24,17 @@ public:
     Q_INVOKABLE void randomAttractor();
 
 signals:
-    void pointCloudChanged();
-    void colorsChanged();
-    void attractorChanged();
-    void backgroundChanged();
     void opacityChanged();
 
 private:
-    PointCloud* m_pointCloud;
-    ColorModel* m_colorModel;
-    Attractor* m_attractor;
+    Attractor* attractor() { return &m_attractor; }
+    PointCloud* pointCloud() { return &m_pointCloud; }
+    ColorViewModel* colorModel() { return &m_colorModel; }
 
-    float m_opacity = 0.5;
+    ColorViewModel m_colorModel;
+    Attractor m_attractor;
+    PointCloud m_pointCloud;
+
+    float m_opacity = 0.1;
 };
 
-#endif // VIEWMODEL_H
