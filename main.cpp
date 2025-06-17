@@ -1,3 +1,5 @@
+#include "PlatformHelper.h"
+
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
@@ -11,7 +13,10 @@ int main(int argc, char *argv[])
     qputenv("QT_QUICK_CONTROLS_MATERIAL_VARIANT", "Dense");
     qputenv("QT_QUICK_CONTROLS_MATERIAL_ACCENT", "Pink");
 
-    QQmlApplicationEngine engine;
+    static PlatformHelper platformHelper;
+    qmlRegisterSingletonInstance("AttratorExplorer", 1, 0, "PlatformHelper",  &platformHelper);
+
+    QQmlApplicationEngine engine;    
 
     QObject::connect(
         &engine,

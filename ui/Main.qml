@@ -405,7 +405,11 @@ ApplicationWindow {
                         Button {
                             Layout.alignment: Qt.AlignCenter
                             text: "Export as .obj"
-                            onClicked: fileDialog.open()
+                            onClicked: {
+                                if (!PlatformHelper.isWeb) {
+                                    fileDialog.open()
+                                }
+                            }
                         }
 
                         FileDialog {
