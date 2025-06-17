@@ -19,7 +19,7 @@ class ViewModel : public QObject
     Q_PROPERTY(float opacity MEMBER m_opacity NOTIFY opacityChanged)
 
 public:
-    ViewModel();
+    explicit ViewModel(QObject* parent = nullptr);
 
     Q_INVOKABLE void randomAttractor();
 
@@ -27,14 +27,14 @@ signals:
     void opacityChanged();
 
 private:
-    Attractor* attractor() { return &m_attractor; }
-    PointCloud* pointCloud() { return &m_pointCloud; }
-    ColorViewModel* colorModel() { return &m_colorModel; }
+    Attractor* attractor() { return m_attractor.get(); }
+    PointCloud* pointCloud() { return m_pointCloud.get(); }
+    ColorViewModel* colorModel() { return m_colorModel.get(); }
 
-    ColorViewModel m_colorModel;
-    Attractor m_attractor;
-    PointCloud m_pointCloud;
+    std::unique_ptr<ColorViewModel> m_colorModel;
+    std::unique_ptr<Attractor> m_attractor;
+    std::unique_ptr<PointCloud> m_pointCloud;
 
-    float m_opacity = 0.1;
+    float m_opacity = 0.1f;
 };
 

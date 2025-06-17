@@ -38,8 +38,8 @@ public:
     };
     Q_ENUM(AttractorType)
 
-    Attractor(AttractorType type = AttractorType::Lorenz, ColorViewModel* colorModel = nullptr);
-    Attractor(AttractorType type, std::vector<float> parameters, ColorViewModel* colorModel = nullptr);
+    Attractor(AttractorType type = AttractorType::Lorenz, ColorViewModel* colorModel = nullptr, QObject* parent = nullptr);
+    Attractor(AttractorType type, std::vector<float> parameters, ColorViewModel* colorModel = nullptr, QObject* parent = nullptr);
 
     Q_INVOKABLE void exportOBJ(QString filename, int count);
 

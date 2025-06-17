@@ -9,6 +9,7 @@
 class AttractorSystem
 {
 public:
+    virtual ~AttractorSystem() = default;
     virtual void next(Vertex & v) = 0;
 
     bool setParameters(std::vector<float> parameters);

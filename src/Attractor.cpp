@@ -7,7 +7,7 @@
 #include <QFile>
 #include <limits>
 
-Attractor::Attractor(AttractorType type, ColorViewModel* colorModel)
+Attractor::Attractor(AttractorType type, ColorViewModel* colorModel, QObject* parent)
     : m_colorModel(colorModel)
 {
     m_parameterModel = new ParameterListModel();
@@ -17,7 +17,7 @@ Attractor::Attractor(AttractorType type, ColorViewModel* colorModel)
     setType(type);
 }
 
-Attractor::Attractor(AttractorType type, std::vector<float> parameters, ColorViewModel* colorModel)
+Attractor::Attractor(AttractorType type, std::vector<float> parameters, ColorViewModel* colorModel, QObject* parent)
     : Attractor(type, colorModel)
 {
     setParameters(parameters);

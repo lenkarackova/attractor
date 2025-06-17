@@ -1,18 +1,21 @@
 #include "include/ViewModel.h"
 
-ViewModel::ViewModel()
-    : m_colorModel()
-    , m_attractor(Attractor::AttractorType::Rossler, &m_colorModel)
-    , m_pointCloud(&m_attractor)
+ViewModel::ViewModel(QObject* parent)
+    : QObject(parent)
 {
-    connect(&m_colorModel, &ColorViewModel::attractorColorChanged, &m_pointCloud, &PointCloud::updateCloud);
-    connect(&m_colorModel, &ColorViewModel::gradientChanged,& m_pointCloud, &PointCloud::updateCloud);
-    connect(&m_colorModel, &ColorViewModel::modeChanged, &m_pointCloud, &PointCloud::updateCloud);
-    connect(&m_attractor, &Attractor::attractorChanged, &m_pointCloud, &PointCloud::updateCloud);
+    m_colorModel = std::make_unique<ColorViewModel>(this);
+    m_attractor = std::make_unique<Attractor>(Attractor::AttractorType::Rossler, m_colorModel.get(), this);
+    m_pointCloud = std::make_unique<PointCloud>(m_attractor.get());
+
+    QObject::connect(m_colorModel.get(), &ColorViewModel::attractorColorChanged, m_pointCloud.get(), &PointCloud::updateCloud);
+    QObject::connect(m_colorModel.get(), &ColorViewModel::gradientChanged, m_pointCloud.get(), &PointCloud::updateCloud);
+    QObject::connect(m_colorModel.get(), &ColorViewModel::modeChanged, m_pointCloud.get(), &PointCloud::updateCloud);
+    QObject::connect(m_attractor.get(), &Attractor::attractorChanged, m_pointCloud.get(), &PointCloud::updateCloud);
 }
 
 
 void ViewModel::randomAttractor()
 {
-    m_attractor.random();
+    if (m_attractor)
+        m_attractor->random();
 }
